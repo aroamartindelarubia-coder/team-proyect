@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FP Arquitectura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --accent: #d35400;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    color: white;
+}
+
+/* FONDO */
+.hero-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(20,20,20,0.75);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 5%;
+    position: absolute;
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+}
+
+/* HERO */
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bienvenida-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    padding: 4rem;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.btn-contacto {
+    padding: 1rem 2rem;
+    border: 1px solid white;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-contacto:hover {
+    background: white;
+    color: black;
+}
+
+/* ===== SERVICIOS ===== */
+.servicios {
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.servicios h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.divider {
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin: 20px auto 40px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* TARJETAS */
+.card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.1);
+}
+
+.card h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.btn {
+    border: 1px solid var(--accent);
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn:hover {
+    background: var(--accent);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 2rem;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero-background"></div>
+<div class="overlay"></div>
+
+<header>
+    <h1>FP Arquitectura</h1>
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Servicios</a>
+        <a href="#">Contacto</a>
+    </nav>
+</header>
+
+<main>
+    <section class="bienvenida-card">
+        <h2>Diseñamos espacios, construimos futuro.</h2>
+        <p>Arquitectura contemporánea y eficiencia energética.</p>
+        <a href="#" class="btn-contacto">Inicia tu proyecto</a>
+    </section>
+</main>
+
+<!-- NUEVA SECCIÓN -->
+<section class="servicios">
+    <h2>Servicios</h2>
+    <div class="divider"></div>
+
+    <div class="services-grid">
+        <div class="card">
+            <h3>Metodología BIM</h3>
+            <p>Gestión avanzada de proyectos digitales.</p>
+            <a href="#" class="btn">Consultar</a>
+        </div>
+
+        <div class="card">
+            <h3>Fabricación Digital</h3>
+            <p>Impresión 3D y prototipado.</p>
+            <a href="#" class="btn">Ver más</a>
+        </div>
+
+        <div class="card">
+            <h3>Sostenibilidad</h3>
+            <p>Eficiencia energética y materiales ecológicos.</p>
+            <a href="#" class="btn">Explorar</a>
+        </div>
+
+        <div class="card">
+            <h3>Inserción Laboral</h3>
+            <p>Conexión con estudios profesionales.</p>
+            <a href="#" class="btn">Detalles</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 FP Arquitectura</p>
+</footer>
+
+</body>
+</html>
