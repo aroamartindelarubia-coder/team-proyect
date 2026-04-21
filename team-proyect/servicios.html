@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP Arquitectura - Servicios de Vanguardia</title>
+    <style>
+        :root {
+            --primary: #1a252f;
+            --accent: #d35400;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* --- CONTENEDOR DEL FONDO --- */
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Imagen de arquitectura moderna minimalista */
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        /* Capa de oscurecimiento para no saturar los servicios */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 37, 47, 0.85); /* Color oscuro profundo con transparencia */
+            backdrop-filter: blur(8px); /* Desenfoque para que la imagen no distraiga */
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0 auto 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* --- TARJETAS DE SERVICIOS --- */
+        .card {
+            background: rgba(255, 255, 255, 0.05); /* Fondo casi invisible */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 20px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #bdc3c7;
+            margin-bottom: 25px;
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 1px solid var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-background"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h1>Centro de Formación Profesional</h1>
+        <div class="divider"></div>
+        <p style="margin-bottom: 50px; color: #ecf0f1;">Especialización Técnica en Arquitectura y Diseño Sostenible</p>
+
+        <div class="services-grid">
+            <div class="card">
+                <h3>Metodología BIM</h3>
+                <p>Especialización en gestión de proyectos digitales bajo estándares internacionales.</p>
+                <a href="#" class="btn">Consultar Plan</a>
+            </div>
+
+            <div class="card">
+                <h3>Fabricación Digital</h3>
+                <p>Laboratorio equipado con tecnología de impresión 3D y prototipado rápido.</p>
+                <a href="#" class="btn">Visitar Lab</a>
+            </div>
+
+            <div class="card">
+                <h3>Sostenibilidad</h3>
+                <p>Formación en eficiencia energética y materiales de bajo impacto ambiental.</p>
+                <a href="#" class="btn">Saber Más</a>
+            </div>
+
+            <div class="card">
+                <h3>Inserción Laboral</h3>
+                <p>Bolsa de empleo activa con los estudios de arquitectura líderes del sector.</p>
+                <a href="#" class="btn">Ver Convenios</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

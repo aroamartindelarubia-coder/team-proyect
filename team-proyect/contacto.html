@@ -1,0 +1,97 @@
+<h1>CONTACTOS</h1>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SERPROFES</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #1f325f;
+        color: white;
+        text-align: center;
+    }
+
+    header {
+        padding: 20px;
+        background: #566378;
+    }
+
+    img {
+        width: 250px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .buttons {
+        margin-top: 30px;
+    }
+
+    button {
+        padding: 12px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #38bdf8;
+        color: black;
+        font-weight: bold;
+    }
+
+    .info {
+        margin-top: 20px;
+        padding: 15px;
+        background: #1e293b;
+        display: none;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+function showInfo(type) {
+    let info = document.getElementById("info");
+
+    if (type === "contacto") {
+        info.innerHTML = " Teléfono: +34 638 68 68 25";
+    }
+
+    if (type === "ubicacion") {
+        info.innerHTML = " Ubicación:Av. de Castilla-La Mancha, 89, 91, 28701 San Sebastián de los Reyes, Madrid , España";
+    }
+
+    if (type === "email") {
+        info.innerHTML = "📧 Email: contacto@serprofes.com";
+    }
+
+    info.style.display = "block";
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>SERPROFES</h1>
+    <p>Plataforma de inteligencia y formación</p>
+</header>
+
+<img src="ia.webp" alt="SERPROFES IA">
+
+<div class="buttons">
+    <button onclick="showInfo('contacto')">Contacto</button>
+    <button onclick="showInfo('ubicacion')">Ubicación</button>
+    <button onclick="showInfo('email')">Email</button>
+</div>
+
+<div id="info" class="info"></div>
+
+</body>
+</html>
