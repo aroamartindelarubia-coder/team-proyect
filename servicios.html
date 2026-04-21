@@ -1,320 +1,268 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FP Arquitectura - Centro de Formación Profesional</title>
-    <style>
-        /* Variables de color para coherencia visual */
-        :root {
-            --primary: #1a252f;
-            --accent: #d35400;
-            --white: #ffffff;
-            --text-light: #ecf0f1;
-            --modal-bg: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #000;
-        }
+<title>Formación Profesional | FP Arquitectura</title>
 
-        /* --- FONDO DE PANTALLA --- */
-        .hero-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Imagen de arquitectura moderna de alta calidad */
-            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-        }
+<style>
+:root {
+    --primary: #1a252f;
+    --accent: #d35400;
+    --white: #ffffff;
+    --text-muted: #bdc3c7;
+    --modal-bg: #ffffff;
+}
 
-        /* Capa de oscurecimiento y desenfoque para legibilidad */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 37, 47, 0.85); 
-            backdrop-filter: blur(8px);
-            z-index: -1;
-        }
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        /* --- CONTENIDO PRINCIPAL --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 80px 20px;
-            text-align: center;
-            color: var(--white);
-        }
+body {
+    color: var(--white);
+    overflow-x: hidden;
+}
 
-        h1 {
-            font-size: 2.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+/* ===== FONDO (INTEGRADO DE TU WEB PRINCIPAL) ===== */
+.hero-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 50px;
-            font-weight: 300;
-        }
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 37, 47, 0.88);
+    backdrop-filter: blur(6px);
+    z-index: -1;
+}
 
-        .divider {
-            width: 60px;
-            height: 4px;
-            background: var(--accent);
-            margin: 0 auto 40px;
-        }
+/* HEADER */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(26, 37, 47, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
 
-        /* --- GRILLA DE SERVICIOS --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-        }
+header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        .card {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 40px 25px;
-            border-radius: 12px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+nav {
+    display: flex;
+    gap: 20px;
+}
 
-        .card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--accent);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
 
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--accent);
-            text-transform: uppercase;
-        }
+nav a:hover {
+    color: var(--accent);
+}
 
-        .card p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #bdc3c7;
-            margin-bottom: 25px;
-        }
+/* MAIN */
+main {
+    padding: 140px 5% 80px;
+    min-height: 100vh;
+}
 
-        /* --- BOTONES --- */
-        .btn {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--white);
-            padding: 12px 20px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border-radius: 4px;
-        }
+.container {
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
 
-        .btn:hover {
-            background: var(--accent);
-            color: var(--white);
-        }
+.section-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
 
-        /* --- VENTANAS MODALES --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            animation: fadeIn 0.3s ease;
-        }
+.divider {
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin: 20px auto;
+}
 
-        .modal-content {
-            background: var(--modal-bg);
-            color: #333;
-            margin: 8% auto;
-            padding: 40px;
-            width: 85%;
-            max-width: 600px;
-            border-radius: 15px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
+.subtitle {
+    color: var(--text-muted);
+    margin-bottom: 60px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
 
-        .modal-content h2 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
+/* GRID */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
 
-        .modal-content ul {
-            padding-left: 20px;
-            line-height: 1.8;
-        }
+/* CARDS */
+.card {
+    position: relative;
+    padding: 40px 25px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    transition: 0.5s;
+}
 
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 15px;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #999;
-            transition: color 0.2s;
-        }
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) blur(4px) brightness(0.4);
+    opacity: 0.6;
+    z-index: -2;
+    transition: 0.5s;
+}
 
-        .close:hover { color: var(--accent); }
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,37,47,0.8), transparent);
+    z-index: -1;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+/* IMÁGENES */
+.card-bim::before { background-image: url('iso9001.webp'); }
+.card-lab::before { background-image: url('3.jpg'); }
+.card-sus::before { background-image: url('2.png'); }
+.card-emp::before { background-image: url('5.png'); }
 
-        /* Responsivo */
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            .modal-content { margin: 20% auto; padding: 25px; }
-        }
-    </style>
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+}
+
+.card:hover::before {
+    filter: grayscale(0%) blur(0);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* TEXTO */
+.card h3 {
+    color: var(--accent);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.card p {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* BOTÓN */
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border: 1px solid var(--accent);
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--accent);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .section-title { font-size: 1.8rem; }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="hero-background"></div>
-    <div class="overlay"></div>
+<div class="hero-background"></div>
+<div class="overlay"></div>
 
+<header>
+    <h1>FP Arquitectura</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="certificados.html">Certificados</a>
+    </nav>
+</header>
+
+<main>
     <div class="container">
-        <h1>Formación en Arquitectura</h1>
+
+        <h2 class="section-title">Formación Especializada</h2>
         <div class="divider"></div>
-        <p class="subtitle">Especialízate en las tecnologías que están construyendo el futuro.</p>
+
+        <p class="subtitle">
+            Programas técnicos diseñados para dominar las herramientas de la arquitectura contemporánea.
+        </p>
 
         <div class="services-grid">
-            <div class="card">
-                <h3>Metodología BIM</h3>
-                <p>Domina el estándar de la industria para la gestión de proyectos de edificación.</p>
-                <button class="btn" onclick="openModal('m-bim')">Consultar Plan</button>
+
+            <div class="card card-bim">
+                <h3>BIM</h3>
+                <p>Gestión integral de proyectos arquitectónicos digitales.</p>
+                <a class="btn">Consultar</a>
             </div>
 
-            <div class="card">
+            <div class="card card-lab">
                 <h3>Fabricación Digital</h3>
-                <p>Laboratorio avanzado de impresión 3D, corte láser y prototipado real.</p>
-                <button class="btn" onclick="openModal('m-lab')">Visitar Lab</button>
+                <p>Impresión 3D, láser y prototipado profesional.</p>
+                <a class="btn">Ver más</a>
             </div>
 
-            <div class="card">
+            <div class="card card-sus">
                 <h3>Sostenibilidad</h3>
-                <p>Aprende a diseñar con eficiencia energética y materiales eco-responsables.</p>
-                <button class="btn" onclick="openModal('m-sus')">Saber Más</button>
+                <p>Diseño eficiente y materiales ecológicos.</p>
+                <a class="btn">Explorar</a>
             </div>
 
-            <div class="card">
+            <div class="card card-emp">
                 <h3>Inserción Laboral</h3>
-                <p>Prácticas profesionales en los mejores estudios nacionales e internacionales.</p>
-                <button class="btn" onclick="openModal('m-emp')">Ver Convenios</button>
+                <p>Prácticas en estudios de arquitectura reales.</p>
+                <a class="btn">Detalles</a>
             </div>
+
         </div>
     </div>
-
-    <div id="m-bim" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('m-bim')">&times;</span>
-            <h2>Plan de Estudios BIM</h2>
-            <p>Este programa intensivo cubre las herramientas líderes del mercado:</p>
-            <ul>
-                <li><strong>Módulo 1:</strong> Modelado Arquitectónico con Revit.</li>
-                <li><strong>Módulo 2:</strong> Coordinación y detección de colisiones.</li>
-                <li><strong>Módulo 3:</strong> Gestión de presupuestos 5D.</li>
-                <li><strong>Módulo 4:</strong> Trabajo colaborativo en BIM 360.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="m-lab" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('m-lab')">&times;</span>
-            <h2>Laboratorio de Prototipado</h2>
-            <p>Nuestro centro pone a tu disposición tecnología de última generación:</p>
-            <ul>
-                <li>Granjas de impresión 3D (FDM y Resina).</li>
-                <li>Cortadoras láser de CO2 para maquetas de madera y acrílico.</li>
-                <li>Fresa CNC para estructuras a escala 1:1.</li>
-                <li>Gafas de Realidad Virtual para recorridos inmersivos.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="m-sus" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('m-sus')">&times;</span>
-            <h2>Diseño Sostenible</h2>
-            <p>Conviértete en un experto en arquitectura bioclimática:</p>
-            <ul>
-                <li>Análisis de ciclo de vida de materiales.</li>
-                <li>Cálculo de huella de carbono en edificación.</li>
-                <li>Certificaciones internacionales (LEED, BREEAM, Passivhaus).</li>
-                <li>Estrategias de ahorro de agua y energía solar.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="m-emp" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('m-emp')">&times;</span>
-            <h2>Conexión con la Industria</h2>
-            <p>Garantizamos una transición fluida al mundo laboral:</p>
-            <ul>
-                <li>Convenios con más de 120 estudios de arquitectura.</li>
-                <li>Bolsa de empleo exclusiva para alumnos.</li>
-                <li>Sesiones de "Networking" con arquitectos reconocidos.</li>
-                <li>95% de tasa de empleabilidad en los primeros 6 meses.</li>
-            </ul>
-        </div>
-    </div>
-
-    <script>
-        // Abrir ventana modal
-        function openModal(id) {
-            document.getElementById(id).style.display = "block";
-            document.body.style.overflow = "hidden"; // Evita el scroll de fondo
-        }
-
-        // Cerrar ventana modal
-        function closeModal(id) {
-            document.getElementById(id).style.display = "none";
-            document.body.style.overflow = "auto"; // Reactiva el scroll
-        }
-
-        // Cerrar si se hace click fuera del cuadro blanco
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = "none";
-                document.body.style.overflow = "auto";
-            }
-        }
-    </script>
+</main>
 
 </body>
 </html>

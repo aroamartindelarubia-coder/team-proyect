@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FP Arquitectura</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+<title>FP Arquitectura</title>
 
 <style>
 :root {
+    --primary: #1a252f;
     --accent: #d35400;
+    --white: #ffffff;
 }
 
 /* RESET */
@@ -17,11 +18,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-    color: white;
+    color: var(--white);
 }
 
 /* FONDO */
@@ -39,28 +40,38 @@ body {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(20,20,20,0.75);
-    backdrop-filter: blur(10px);
+    background: rgba(26, 37, 47, 0.85);
+    backdrop-filter: blur(8px);
     z-index: -1;
 }
 
 /* HEADER */
 header {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 2rem 5%;
-    position: absolute;
-    width: 100%;
+    padding: 20px 5%;
+    background: rgba(26, 37, 47, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 nav {
     display: flex;
-    gap: 2rem;
+    gap: 20px;
 }
 
 nav a {
     color: rgba(255,255,255,0.8);
     text-decoration: none;
+    font-size: 0.9rem;
 }
 
 /* HERO */
@@ -69,38 +80,52 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 80px;
 }
 
-.bienvenida-card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    padding: 4rem;
-    border-radius: 20px;
+.hero-card {
     text-align: center;
+    padding: 3rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
 }
 
-.btn-contacto {
-    padding: 1rem 2rem;
-    border: 1px solid white;
-    border-radius: 50px;
+.hero-card h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero-card p {
+    margin: 15px 0 25px;
+    color: #bdc3c7;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid var(--accent);
     text-decoration: none;
-    color: white;
+    color: var(--white);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.btn-contacto:hover {
-    background: white;
-    color: black;
+.btn:hover {
+    background: var(--accent);
 }
 
-/* ===== SERVICIOS ===== */
+/* SERVICIOS */
 .servicios {
     padding: 80px 10%;
     text-align: center;
 }
 
 .servicios h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .divider {
@@ -116,11 +141,11 @@ main {
     gap: 30px;
 }
 
-/* TARJETAS */
+/* CARDS */
 .card {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
-    padding: 30px;
+    padding: 40px 20px;
     transition: 0.4s;
 }
 
@@ -132,23 +157,14 @@ main {
 
 .card h3 {
     color: var(--accent);
+    font-size: 1.1rem;
     margin-bottom: 10px;
 }
 
 .card p {
-    color: #ccc;
+    color: #bdc3c7;
     margin-bottom: 20px;
-}
-
-.btn {
-    border: 1px solid var(--accent);
-    padding: 10px 20px;
-    text-decoration: none;
-    color: white;
-}
-
-.btn:hover {
-    background: var(--accent);
+    font-size: 0.95rem;
 }
 
 /* FOOTER */
@@ -168,47 +184,47 @@ footer {
 <header>
     <h1>FP Arquitectura</h1>
     <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Servicios</a>
-        <a href="#">Contacto</a>
+        <a href="">Inicio </a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="certificados.html">Certificados internos</a>
     </nav>
 </header>
 
 <main>
-    <section class="bienvenida-card">
-        <h2>Diseñamos espacios, construimos futuro.</h2>
-        <p>Arquitectura contemporánea y eficiencia energética.</p>
-        <a href="#" class="btn-contacto">Inicia tu proyecto</a>
+    <section class="hero-card">
+        <h2>Centro de Formación Profesional</h2>
+        <p>Arquitectura contemporánea, BIM y sostenibilidad aplicada</p>
+        <a href="#servicios" class="btn">Explorar servicios</a>
     </section>
 </main>
 
-<!-- NUEVA SECCIÓN -->
-<section class="servicios">
+<section class="servicios" id="servicios">
     <h2>Servicios</h2>
     <div class="divider"></div>
 
     <div class="services-grid">
         <div class="card">
             <h3>Metodología BIM</h3>
-            <p>Gestión avanzada de proyectos digitales.</p>
+            <p>Gestión avanzada de proyectos digitales con estándares internacionales.</p>
             <a href="#" class="btn">Consultar</a>
         </div>
 
         <div class="card">
             <h3>Fabricación Digital</h3>
-            <p>Impresión 3D y prototipado.</p>
+            <p>Impresión 3D y prototipado rápido en laboratorio técnico.</p>
             <a href="#" class="btn">Ver más</a>
         </div>
 
         <div class="card">
             <h3>Sostenibilidad</h3>
-            <p>Eficiencia energética y materiales ecológicos.</p>
+            <p>Diseño eficiente y materiales de bajo impacto ambiental.</p>
             <a href="#" class="btn">Explorar</a>
         </div>
 
         <div class="card">
             <h3>Inserción Laboral</h3>
-            <p>Conexión con estudios profesionales.</p>
+            <p>Conexión directa con estudios profesionales de arquitectura.</p>
             <a href="#" class="btn">Detalles</a>
         </div>
     </div>

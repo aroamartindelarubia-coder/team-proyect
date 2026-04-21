@@ -1,246 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificaciones</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        header {
-            background-color: #1a3c40;
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-        }
+<title>Certificaciones | FP Arquitectura</title>
 
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
+<style>
+:root {
+    --primary: #1a252f;
+    --accent: #d35400;
+    --white: #ffffff;
+    --text-muted: #bdc3c7;
+}
 
-        p.intro {
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        section {
-            background-color: #bdc3c7;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-width: 800px;
-        }
+body {
+    color: var(--white);
+    background-color: var(--primary);
+}
 
-        section h2 {
-            color: #1a3c40;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
+/* FONDO Y OVERLAY */
+.hero-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
 
-        section p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 37, 47, 0.88);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+}
 
-        section img {
-            display: block;
-            margin: 1rem auto;
-            max-width: 200px;
-            border-radius: 6px;
-            border: 2px solid #ddd;
-        }
+/* HEADER FIJO */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(26, 37, 47, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 100; /* Muy alto para que nada lo tape */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
 
-        footer {
-            text-align: center;
-            background-color: #1a3c40;
-            color: white;
-            padding: 1rem;
-            font-size: 0.9rem;
-        }
+header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-            section {
-                margin: 1rem;
-                padding: 1rem;
-            }
-        }
-    
-        :root {
-            --primary: #1a252f;
-            --accent: #d35400;
-            --white: #ffffff;
-        }
+nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 20px;
+}
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', sans-serif;
-        }
+nav a:hover { color: var(--accent); }
 
-        /* --- CONTENEDOR DEL FONDO --- */
-        .hero-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Imagen de arquitectura moderna minimalista */
-            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-        }
+/* CONTENIDO PRINCIPAL */
+main {
+    /* Ajustamos este valor para que el título baje lo suficiente */
+    padding: 160px 5% 80px; 
+    position: relative;
+    z-index: 1; 
+}
 
-        /* Capa de oscurecimiento para no saturar los servicios */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 37, 47, 0.85); /* Color oscuro profundo con transparencia */
-            backdrop-filter: blur(8px); /* Desenfoque para que la imagen no distraiga */
-            z-index: -1;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-            color: var(--white);
-        }
+/* TÍTULO VISIBLE */
+.section-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    display: block; /* Asegura que ocupe su espacio */
+}
 
-        h1 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
+.divider {
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin: 20px auto 40px;
+}
 
-        .divider {
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 0 auto 40px;
-        }
+.intro-text {
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+}
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
+/* GRID Y CARDS */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
 
-        /* --- TARJETAS DE SERVICIOS --- */
-        .card {
-            background: rgba(255, 255, 255, 0.05); /* Fondo casi invisible */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 20px;
-            border-radius: 4px;
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+.cert-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent);
-            transform: translateY(-10px);
-        }
+.cert-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+}
 
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
+.cert-card img {
+    max-height: 100px;
+    margin-bottom: 25px;
+    filter: grayscale(100%) brightness(1.2);
+    transition: 0.5s;
+}
 
-        .card p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #bdc3c7;
-            margin-bottom: 25px;
-        }
+.cert-card:hover img {
+    filter: grayscale(0%);
+}
 
-        /* --- BOTONES --- */
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border: 1px solid var(--accent);
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
+.cert-card h3 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
 
-        .btn:hover {
-            background: var(--accent);
-            color: var(--white);
-        }
+.cert-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
 
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-        }
-    </style>
+footer {
+    text-align: center;
+    padding: 40px;
+    opacity: 0.6;
+    font-size: 0.8rem;
+}
+</style>
 </head>
+
 <body>
 
     <div class="hero-background"></div>
     <div class="overlay"></div>
-    
+
     <header>
-        <h1>Nuestras certificaciones</h1>
-        <p class="intro">Nuestra empresa cuenta con diversas certificaciones que avalan la calidad, sostenibilidad y seguridad de nuestros proyectos arquitectónicos.</p>
+        <h1>FP Arquitectura</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="certificados.html" style="color: var(--accent);">Certificados</a>
+        </nav>
     </header>
 
-    <section>
-        <h2>Certificación ISO 9001:2015</h2>
-        <p>Garantiza la excelencia en la gestión de calidad de todos nuestros procesos, desde el diseño conceptual hasta la ejecución de obra.</p>
-        <img src="iso9001.webp" alt="Certificación ISO 9001:2015">
-    </section>
+    <main>
+        <div class="container">
+            <h2 class="section-title">Certificaciones</h2>
+            <div class="divider"></div>
+            <p class="intro-text">Estándares internacionales que garantizan la calidad y el futuro de nuestros proyectos.</p>
 
-    <section>
-        <h2>Certificación LEED Gold</h2>
-        <p>Reconoce nuestro compromiso con la arquitectura sostenible y la eficiencia energética en edificaciones de alto rendimiento ambiental.</p>
-        <img src="2.png" alt="Certificación LEED Gold">
-    </section>
+            <div class="cert-grid">
+                <article class="cert-card">
+                    <img src="iso9001.webp" alt="ISO 9001">
+                    <h3>ISO 9001:2015</h3>
+                    <p>Excelencia en la gestión de calidad y procesos de diseño estructural.</p>
+                </article>
 
-    <section>
-        <h2>Certificación BREEAM</h2>
-        <p>Evalúa el impacto ambiental de nuestros proyectos y promueve prácticas responsables en el uso de materiales y recursos naturales.</p>
-        <img src="3.jpg" alt="Certificación BREEAM">
-    </section>
+                <article class="cert-card">
+                    <img src="2.png" alt="LEED Gold">
+                    <h3>LEED Gold</h3>
+                    <p>Sostenibilidad y eficiencia energética de alto nivel ambiental.</p>
+                </article>
 
-    <section>
-        <h2>Certificación ISO 14001</h2>
-        <p>Demuestra nuestra gestión ambiental responsable, asegurando que cada proyecto minimiza su huella ecológica.</p>
-        <img src="4.png" alt="Certificación ISO 14001">
-    </section>
+                <article class="cert-card">
+                    <img src="3.jpg" alt="BREEAM">
+                    <h3>BREEAM ES</h3>
+                    <p>Evaluación técnica de sostenibilidad en la edificación contemporánea.</p>
+                </article>
 
-    <section>
-        <h2>Certificación WELL Building Standard</h2>
-        <p>Garantiza el bienestar y la salud de los ocupantes de nuestros espacios, integrando criterios de confort, luz natural y calidad del aire.</p>
-        <img src="5.png" alt="Certificación WELL Building Standard">
-    </section>
+                <article class="cert-card">
+                    <img src="4.png" alt="ISO 14001">
+                    <h3>ISO 14001</h3>
+                    <p>Compromiso firme con la reducción del impacto ambiental en obra.</p>
+                </article>
+
+                <article class="cert-card">
+                    <img src="5.png" alt="WELL Standard">
+                    <h3>WELL Standard</h3>
+                    <p>Diseño enfocado íntegramente en la salud y el confort del usuario.</p>
+                </article>
+            </div>
+        </div>
+    </main>
 
     <footer>
-        <p>Estas certificaciones reflejan nuestro compromiso con la innovación, la sostenibilidad y la excelencia en el diseño arquitectónico.</p>
+        <p>&copy; 2026 FP Arquitectura</p>
     </footer>
+
 </body>
 </html>
