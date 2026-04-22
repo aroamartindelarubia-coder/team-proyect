@@ -1,268 +1,254 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Formación Técnica | FP Arquitectura</title>
+    <style>
+        :root {
+            --primary: #1a252f;
+            --accent: #d35400;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --chat-dark: #121a21;
+            --text-muted: #bdc3c7;
+        }
 
-<title>Formación Profesional | FP Arquitectura</title>
+        /* --- FONDO Y ESTRUCTURA --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { color: var(--white); background-color: var(--primary); overflow-x: hidden; min-height: 100vh; }
 
-<style>
-:root {
-    --primary: #1a252f;
-    --accent: #d35400;
-    --white: #ffffff;
-    --text-muted: #bdc3c7;
-    --modal-bg: #ffffff;
-}
+        .hero-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; z-index: -2;
+        }
 
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 37, 47, 0.92); backdrop-filter: blur(8px); z-index: -1;
+        }
 
-body {
-    color: var(--white);
-    overflow-x: hidden;
-}
+        /* --- CABECERA --- */
+        header {
+            position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between;
+            align-items: center; padding: 20px 5%; background: rgba(26, 37, 47, 0.7);
+            backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        header h1 { font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; }
 
-/* ===== FONDO (INTEGRADO DE TU WEB PRINCIPAL) ===== */
-.hero-background {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    z-index: -2;
-}
+        /* --- CONTENIDO --- */
+        main { padding: 160px 5% 80px; position: relative; z-index: 1; }
+        .container { max-width: 1100px; margin: 0 auto; text-align: center; }
+        .section-title { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 300; }
+        .divider { width: 60px; height: 4px; background: var(--accent); margin: 20px auto 40px; }
 
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(26, 37, 47, 0.88);
-    backdrop-filter: blur(6px);
-    z-index: -1;
-}
+        /* GRID SERVICIOS */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+        .card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 25px; border-radius: 4px; transition: 0.4s; display: flex;
+            flex-direction: column; align-items: center; backdrop-filter: blur(5px);
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255, 255, 255, 0.08); }
+        .card img { width: 50px; margin-bottom: 20px; filter: brightness(1.5); }
+        .card h3 { font-size: 1.1rem; margin-bottom: 15px; letter-spacing: 1px; }
 
-/* HEADER */
-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background: rgba(26, 37, 47, 0.6);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-}
+        .btn {
+            background: transparent; border: 1px solid var(--accent); color: var(--white);
+            padding: 10px 24px; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; transition: 0.3s;
+        }
+        .btn:hover { background: var(--accent); }
 
-header h1 {
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
+        .modal-content { background: #fff; color: #333; margin: 5% auto; padding: 40px; width: 90%; max-width: 450px; border-radius: 4px; position: relative; border-left: 6px solid var(--accent); }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: #999; }
+        form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        input, select, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 3px; width: 100%; }
 
-nav {
-    display: flex;
-    gap: 20px;
-}
+        /* --- CHATBOT GUÍA COMPLETA --- */
+        #chat-trigger {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; border-radius: 2px;
+        }
 
-nav a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    font-size: 0.9rem;
-}
+        #chat-window {
+            position: fixed; bottom: 100px; right: 30px; width: 380px; height: 600px; background: var(--chat-dark);
+            border: 1px solid rgba(255,255,255,0.1); display: none; flex-direction: column; z-index: 1000; border-radius: 4px;
+        }
 
-nav a:hover {
-    color: var(--accent);
-}
+        .chat-header { padding: 20px; background: #1a252f; border-bottom: 1px solid var(--accent); display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h4 { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
 
-/* MAIN */
-main {
-    padding: 140px 5% 80px;
-    min-height: 100vh;
-}
+        .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .msg { font-size: 0.85rem; padding: 12px; max-width: 90%; line-height: 1.4; border-radius: 2px; }
+        .msg.bot { background: rgba(255,255,255,0.05); border-left: 3px solid var(--accent); color: #ddd; }
+        .msg.user { background: var(--accent); color: white; align-self: flex-end; }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
+        /* BOTONES DE GUÍA */
+        .chat-menu { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .menu-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border-radius: 20px; transition: 0.3s;
+        }
+        .menu-btn:hover { background: var(--accent); border-color: var(--accent); }
 
-.section-title {
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
+        .chat-footer { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; }
+        .chat-input { flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 0.85rem; }
 
-.divider {
-    width: 80px;
-    height: 4px;
-    background: var(--accent);
-    margin: 20px auto;
-}
-
-.subtitle {
-    color: var(--text-muted);
-    margin-bottom: 60px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-}
-
-/* GRID */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-}
-
-/* CARDS */
-.card {
-    position: relative;
-    padding: 40px 25px;
-    border-radius: 4px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.03);
-    transition: 0.5s;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(100%) blur(4px) brightness(0.4);
-    opacity: 0.6;
-    z-index: -2;
-    transition: 0.5s;
-}
-
-.card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(26,37,47,0.8), transparent);
-    z-index: -1;
-}
-
-/* IMÁGENES */
-.card-bim::before { background-image: url('iso9001.webp'); }
-.card-lab::before { background-image: url('3.jpg'); }
-.card-sus::before { background-image: url('2.png'); }
-.card-emp::before { background-image: url('5.png'); }
-
-.card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent);
-}
-
-.card:hover::before {
-    filter: grayscale(0%) blur(0);
-    opacity: 1;
-    transform: scale(1.05);
-}
-
-/* TEXTO */
-.card h3 {
-    color: var(--accent);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.card p {
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-/* BOTÓN */
-.btn {
-    display: inline-block;
-    padding: 12px 18px;
-    border: 1px solid var(--accent);
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: var(--accent);
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .section-title { font-size: 1.8rem; }
-}
-</style>
+        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; }
+    </style>
 </head>
-
 <body>
 
-<div class="hero-background"></div>
-<div class="overlay"></div>
+    <div class="hero-background"></div>
+    <div class="overlay"></div>
 
-<header>
-    <h1>FP Arquitectura</h1>
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="certificados.html">Certificados</a>
-    </nav>
-</header>
+    <header>
+        <h1>FP Arquitectura</h1>
+        <nav>
+            <a href="Inicio.html" style="color: white;">Inicio</a>
+            <a href="certificados.html" style="color: white;">Servicios</a>
+            <a href="contacto.html" style="color: white;">Contacto</a>
+        </nav>
+        <nav><span style="font-size: 0.7rem; color: var(--accent);">GUIADO_POR_IA_V2</span></nav>
+    </header>
 
-<main>
-    <div class="container">
-
-        <h2 class="section-title">Formación Especializada</h2>
-        <div class="divider"></div>
-
-        <p class="subtitle">
-            Programas técnicos diseñados para dominar las herramientas de la arquitectura contemporánea.
-        </p>
-
-        <div class="services-grid">
-
-            <div class="card card-bim">
-                <h3>BIM</h3>
-                <p>Gestión integral de proyectos arquitectónicos digitales.</p>
-                <a class="btn">Consultar</a>
+    <main>
+        <div class="container">
+            <h2 class="section-title">Manual de Formación</h2>
+            <div class="divider"></div>
+            
+            <div class="services-grid">
+                <article class="card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3248/3248235.png" alt="BIM">
+                    <h3>BIM Management</h3>
+                    <button class="btn" onclick="openForm('BIM Management')">Expediente</button>
+                </article>
+                <article class="card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1705/1705831.png" alt="LAB">
+                    <h3>Fabricación Digital</h3>
+                    <button class="btn" onclick="openForm('Fabricación Digital')">Acceso Lab</button>
+                </article>
+                <article class="card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2913/2913520.png" alt="EFICIENCIA">
+                    <h3>Sostenibilidad</h3>
+                    <button class="btn" onclick="openForm('Sostenibilidad')">Auditoría</button>
+                </article>
+                <article class="card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1063/1063376.png" alt="CARRERA">
+                    <h3>Empleabilidad</h3>
+                    <button class="btn" onclick="openForm('Empleabilidad')">Convenios</button>
+                </article>
             </div>
+        </div>
+    </main>
 
-            <div class="card card-lab">
-                <h3>Fabricación Digital</h3>
-                <p>Impresión 3D, láser y prototipado profesional.</p>
-                <a class="btn">Ver más</a>
-            </div>
-
-            <div class="card card-sus">
-                <h3>Sostenibilidad</h3>
-                <p>Diseño eficiente y materiales ecológicos.</p>
-                <a class="btn">Explorar</a>
-            </div>
-
-            <div class="card card-emp">
-                <h3>Inserción Laboral</h3>
-                <p>Prácticas en estudios de arquitectura reales.</p>
-                <a class="btn">Detalles</a>
-            </div>
-
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeForm()">&times;</span>
+            <h3 id="formTitle">SOLICITUD</h3>
+            <form id="mainForm">
+                <input type="text" placeholder="Nombre completo" required>
+                <input type="email" placeholder="Email" required>
+                <select required>
+                    <option value="" disabled selected>Perfil</option>
+                    <option>Arquitecto</option>
+                    <option>Estudiante</option>
+                </select>
+                <textarea placeholder="Consulta..." rows="3"></textarea>
+                <button type="submit" class="btn" style="background:var(--primary); width:100%;">Enviar</button>
+            </form>
         </div>
     </div>
-</main>
 
+    <div id="chat-trigger" onclick="toggleChat()">
+        <img src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png" style="width:25px; filter:invert(1);">
+    </div>
+
+    <div id="chat-window">
+        <div class="chat-header">
+            <h4>GUÍA DE USUARIO COMPLETA</h4>
+            <span style="cursor:pointer; color:white;" onclick="toggleChat()">&times;</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="msg bot">
+                Hola. Soy tu guía interactiva. He seleccionado los temas más frecuentes para ayudarte de inmediato. Selecciona una opción o escribe tu duda.
+                <div class="chat-menu">
+                    <button class="menu-btn" onclick="quickAction('Programas')">📚 Programas</button>
+                    <button class="menu-btn" onclick="quickAction('Precios')">💰 Precios y Becas</button>
+                    <button class="menu-btn" onclick="quickAction('Inscripción')">📝 Inscripciones</button>
+                    <button class="menu-btn" onclick="quickAction('Contraseña')">🔑 Olvido Contraseña</button>
+                    <button class="menu-btn" onclick="quickAction('Contacto')">📞 Contacto Directo</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Escribe aquí..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()" style="background:none; border:none; color:var(--accent); cursor:pointer;">ENVIAR</button>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 FP Arquitectura</p></footer>
+
+    <script>
+        function openForm(title) { document.getElementById("formModal").style.display = "block"; document.getElementById("formTitle").innerText = title; }
+        function closeForm() { document.getElementById("formModal").style.display = "none"; }
+        function toggleChat() { const chat = document.getElementById('chat-window'); chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex'; }
+
+        function quickAction(type) {
+            const body = document.getElementById('chatBody');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.innerText = "Información sobre: " + type;
+            body.appendChild(userMsg);
+            processQuery(type.toLowerCase());
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            if(!input.value.trim()) return;
+            const body = document.getElementById('chatBody');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.innerText = input.value;
+            body.appendChild(userMsg);
+            processQuery(input.value.toLowerCase());
+            input.value = "";
+        }
+
+        function processQuery(query) {
+            const body = document.getElementById('chatBody');
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg bot';
+                let response = "";
+
+                if (query.includes("programa") || query.includes("curso")) {
+                    response = "<b>Nuestros Programas:</b><br>1. Master BIM Management (Revit).<br>2. Especialista en Fabricación Digital.<br>3. Auditoría Energética.<br>Todos incluyen titulación oficial Autodesk.";
+                } 
+                else if (query.includes("precio") || query.includes("beca") || query.includes("cuanto cuesta")) {
+                    response = "<b>Finanzas:</b><br>- Becas de hasta el 30% por pronto pago.<br>- Financiación en 12 meses sin intereses.<br>- Descuentos para desempleados y recién graduados.";
+                }
+                else if (query.includes("inscripcion") || query.includes("matricular")) {
+                    response = "<b>Pasos para Inscripción:</b><br>1. Selecciona tu curso en la web.<br>2. Completa el formulario de 'Expediente'.<br>3. Recibirás un enlace de pago y acceso al campus en 24h.";
+                }
+                else if (query.includes("contraseña") || query.includes("acceso") || query.includes("login")) {
+                    response = "<b>Soporte de Acceso:</b><br>Si has olvidado tu clave, ve a la página de Login y pulsa '¿Olvidó su contraseña?'. Recibirás un email de reset instantáneo. Revisa tu carpeta SPAM.";
+                }
+                else if (query.includes("contacto") || query.includes("telefono") || query.includes("email")) {
+                    response = "<b>Atención Directa:</b><br>📞 Tel: +34 900 000 000<br>📧 Email: soporte@fparquitectura.es<br>📍 Oficina: Madrid, Paseo de la Castellana.";
+                }
+                else {
+                    response = "No he identificado esa duda exacta. Prueba con los botones del menú superior o contacta con un agente humano mediante el email soporte@fparquitectura.es.";
+                }
+
+                botMsg.innerHTML = response;
+                body.appendChild(botMsg);
+                body.scrollTop = body.scrollHeight;
+            }, 800);
+        }
+    </script>
 </body>
 </html>
